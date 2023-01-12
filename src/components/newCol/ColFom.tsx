@@ -36,20 +36,25 @@ const ColFom = (props: any) => {
         setUserInput({amount: '', title: ''})
     }
 
+    const cancelHandler = () => {
+      props.onCancelForm()
+    }
+
   return (
-    <form onSubmit={submitHandler}>
-      <div className="formgrid grid">
-        <div className="col flex flex-column">
-          <label htmlFor="title">Title</label>
-          <input type="text" value={userInput.title} onChange={titleChangeHandler} />
-          <label htmlFor="amount">Amount</label>
-          <input type="number" value={userInput.amount} onChange={amountChangeHandler} />
+    <div className="flex flex-column text-center m-0 p-2">
+      <form onSubmit={submitHandler}>
+        <div className="field">
+            <label htmlFor="title" className="block">Title:</label>
+            <input type="text" className="w-11" value={userInput.title} onChange={titleChangeHandler} />
         </div>
-        <div className="col">
-            <button className="w-full h-full border-none border-round-lg hover:surface-400">Create</button>
+        <div className="field">
+            <label htmlFor="amount" className="block">Amount:</label>
+            <input type="number" className="w-11" value={userInput.amount} onChange={amountChangeHandler} />
         </div>
-      </div>
-    </form>
+              <button className="w-11 h-2rem mb-2 border-none border-round-lg md:surface-300 hover:surface-400">Create</button>
+      </form>
+      <button onClick={cancelHandler} className="w-11 h-2rem m-auto border-none border-round-lg bg-red-400 hover:bg-red-500 ">Cancel</button>
+    </div>
   );
 };
 
