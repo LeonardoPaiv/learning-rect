@@ -15,10 +15,19 @@ function App() {
   const [dummyCols, setdummyCols] = useState(cols)
 
   const addColHandler = (col: any) => {
-    console.log(col)
     setdummyCols(prevState => {
       return [...prevState, col]
     })
+  }
+
+  const filterCols = (event: any) => {
+    if (event.target.value) {
+      const colsFiltred = dummyCols.filter(col => col.amount == event.target.value)
+      setdummyCols(colsFiltred)
+    }
+    if (!event.target.value) {
+      setdummyCols(cols)
+    }
   }
 
   return (
@@ -28,6 +37,7 @@ function App() {
       </div>
       <div className="col md:col-8">
         <div className="grid">
+          <div className="col-12 w-full flex justify-content-end"><label htmlFor="filter">Filter:</label><input type="number" onChange={filterCols}/></div>
           {dummyCols.map(col => <Cols key={col.id} title={col.title} amount={col.amount} />)}
         </div>
       </div>
