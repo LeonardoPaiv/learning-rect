@@ -6,17 +6,17 @@ const ColFom = (props: any) => {
     // const [amount, setAmount] = useState('')
 
     const [userInput, setUserInput] = useState({
-        enteredTitle: '',
+        title: '',
         amount: ''
     })
 
     const titleChangeHandler = (event: any) => {
         setUserInput((prevState) => {
-            return { ...prevState, enteredTitle: event.target.value}
+            return { ...prevState, title: event.target.value}
         })
         // setUserInput({
         //     ...userInput,
-        //     enteredTitle:event.target.value
+        //     title:event.target.value
         // })
     }
 
@@ -33,7 +33,7 @@ const ColFom = (props: any) => {
     const submitHandler = (event: any) => {
         event.preventDefault();
         props.onSaveColData(userInput)
-        setUserInput({amount: '', enteredTitle: ''})
+        setUserInput({amount: '', title: ''})
     }
 
   return (
@@ -41,7 +41,7 @@ const ColFom = (props: any) => {
       <div className="formgrid grid">
         <div className="col flex flex-column">
           <label htmlFor="title">Title</label>
-          <input type="text" value={userInput.enteredTitle} onChange={titleChangeHandler} />
+          <input type="text" value={userInput.title} onChange={titleChangeHandler} />
           <label htmlFor="amount">Amount</label>
           <input type="number" value={userInput.amount} onChange={amountChangeHandler} />
         </div>

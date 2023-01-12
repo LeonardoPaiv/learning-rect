@@ -1,32 +1,35 @@
+import { useState } from 'react'
 import './App.scss'
 import Cols from './components/Cols'
 
 import NewCol from './components/newCol/NewCol'
 
+const cols = [
+  {title: 'teste', amount: 1, id: '1'},
+  {title: 'teste', amount: 2, id: '2'},
+  {title: 'teste', amount: 3, id: '3'},
+]
+
 function App() {
+
+  const [dummyCols, setdummyCols] = useState(cols)
 
   const addColHandler = (col: any) => {
     console.log(col)
+    setdummyCols(prevState => {
+      return [...prevState, col]
+    })
   }
 
   return (
     <div className="grid flex flex-column text-400 font-semibold md:flex-row">
-      <div className="col-8">
-        <div className="grid">
-          <Cols title='teste' amount={1}/>
-          <Cols title='sub teste' amount={1}/>
-          <Cols title='teste teste' amount={1}/>
-          <Cols title='teste 4' amount={1}/>
-          <Cols title='teste 4' amount={1}/>
-          <Cols title='teste 4'/>
-          <Cols title='teste 4'/>
-          <Cols title='teste 4'/>
-          <Cols title='teste 4'/>
-          <Cols title='teste 4'/>
-        </div>
-      </div>
-      <div className="col-4">
+      <div className="col md:col-4">
         <NewCol onAddCol={addColHandler}/>
+      </div>
+      <div className="col md:col-8">
+        <div className="grid">
+          {dummyCols.map(col => <Cols key={col.id} title={col.title} amount={col.amount} />)}
+        </div>
       </div>
     </div>
   )
